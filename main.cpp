@@ -121,10 +121,6 @@ void generateCodes(int root, string codes[]) {
     // Record code when a leaf node is reached.
     stack<pair<int, string>> stack;
     for (int i = 0; i < 26; i++) {
-        if (weightArr[i] < root) {
-            stack.push(make_pair(i, codes[i]));
-        }
-
 
     }
 }
