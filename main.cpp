@@ -80,6 +80,10 @@ int createLeafNodes(int freq[]) {
             weightArr[nextFree] = freq[i];
             leftArr[nextFree] = -1;
             rightArr[nextFree] = -1;
+
+            cout << charArr[nextFree] << " ";
+            cout << weightArr[nextFree] << "\n";
+
             nextFree++;
         }
     }
@@ -100,14 +104,23 @@ int buildEncodingTree(int nextFree) {
     // 4. Return the index of the last remaining node (root)
     MinHeap heap;
     for (int i = 0; i < nextFree; i++) {
+        cout << i << " " << weightArr[i] << endl;
+        heap.push(i, weightArr);
+    }
+    cout << "Pushed " << heap.size << " leaf nodes into the heap.\n";
+    while (heap.size > 1) {
+        int l = heap.pop(weightArr);
+        cout << "Left: " << l << endl;
+        int r = heap.pop(weightArr);
+        cout << "Right: " << r << endl;
+        int parent = l + r;
+        cout << "Parent: " << parent << endl;
+        heap.push(parent, weightArr);
+    }
+    cout << "Index of the last remaining node: " << heap.size - 1 << "\n";
+    for (int i = 0; i < 26; i++) {
         if (weightArr[i] > 0) {
-            heap.push(i, weightArr);
-        }
-        while (heap.size > 1) {
-            int l = heap.pop(weightArr);
-            int r = heap.pop(weightArr);
-            int parent = l + r;
-            heap.push(parent, weightArr);
+            cout << i << " " << weightArr[i] << endl;
         }
     }
     return heap.size;
@@ -120,9 +133,20 @@ void generateCodes(int root, string codes[]) {
     // Left edge adds '0', right edge adds '1'.
     // Record code when a leaf node is reached.
     stack<pair<int, string>> stack;
-    for (int i = 0; i < 26; i++) {
-
-    }
+    int nextFree = root;
+    // for (int i = 0; i < 26; i++) {
+    //     if (!codes[i].empty()) {
+    //        if () {
+    //            codes[i] = codes[i] + '0';
+    //        }
+    //        else if () {
+    //            codes[i] = codes[i] + '1';
+    //        }
+    //        else {
+    //            stack.push(make_pair());
+    //        }
+    //     }
+    // }
 }
 
 // Step 5: Print table and encoded message
